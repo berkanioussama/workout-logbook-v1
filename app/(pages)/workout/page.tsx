@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from "@/components/ui/button";
 import { Plus, Search } from "lucide-react";
 import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import CreatePlanForm from "@/features/plans/components/create-plan-form";
@@ -26,8 +25,8 @@ const CreatePlan = () => {
             <h2 className="text-xl font-bold">Quick Start</h2>
             <Drawer>
                 <DrawerTrigger className="flex items-center justify-center gap-2 bg-neutral-800 px-2 py-2 rounded-md font-semibold cursor-pointer">
-                        <Plus/>
-                        Create New Plan
+                    <Plus/>
+                    Create New Plan
                 </DrawerTrigger>
                 <DrawerContent className="bg-neutral-800 flex flex-col items-center">
                     <DrawerTitle></DrawerTitle>
@@ -44,9 +43,8 @@ const Plans = () => {
             <h2 className="text-xl font-bold">Plans</h2>
             <Drawer>
                 <DrawerTrigger className="flex items-center justify-center gap-2 bg-neutral-800 px-2 py-2 rounded-md font-semibold cursor-pointer">
-
-                        <Search/>
-                        Explore Plans
+                    <Search/>
+                    Explore Plans
                 </DrawerTrigger>
                 <DrawerContent className="bg-neutral-800 flex flex-col items-center">
                     <DrawerTitle></DrawerTitle>

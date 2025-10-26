@@ -1,10 +1,7 @@
 'use server'
 
 import { api } from '@/lib/api'
-
-interface AddPlanBodyData {
-  name: string
-}
+import { AddPlanFormInput, PlanSchema } from '../schemas/plan'
 
 export async function getPlans() {
   const client = await api()
@@ -12,8 +9,20 @@ export async function getPlans() {
   return data.data
 }
 
-export async function addPlan(data: AddPlanBodyData) {
+export async function addPlan(data: AddPlanFormInput) {
   const client = await api()
   const { data: plan } = await client.post('plans', data)
   return plan.data
+}
+
+export async function updatePlan(data: PlanSchema) {
+  const client = await api()
+  const { data: plan } = await client.put(`plans`, data)
+  return plan.data
+}
+
+export async function deletePlan(planId: string) {
+  const client = await api()
+  await client.delete(`plans/${planId}`)
+  return { success: true }
 }

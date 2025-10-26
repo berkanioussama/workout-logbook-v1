@@ -1,14 +1,14 @@
 'use client'
 
 import { useApiMutation } from '@/hooks/use-api-mutation'
-import { addPlan } from '@/features/plans/actions/plans'
+import { updatePlan } from '@/features/plans/actions/plans'
 import { useQueryClient } from '@tanstack/react-query'
 
-export function useAddPlan() {
+export function useUpdatePlan() {
   const queryClient = useQueryClient()
-  return useApiMutation(addPlan, {
-    successMessage: 'Plan added successfully',
-    errorMessage: 'Failed to add plan',
+  return useApiMutation(updatePlan, {
+    successMessage: 'Plan updated successfully',
+    errorMessage: 'Failed to update plan',
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['get-user-plans'] })
     },

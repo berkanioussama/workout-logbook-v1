@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "@/components/footer";
-import ReactQueryProvider from "@/components/react-query-provider";
+import ReactQueryProvider from "@/components/providers/react-query-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({

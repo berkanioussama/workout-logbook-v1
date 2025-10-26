@@ -9,7 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useUpdateUser } from '@/features/users/hooks/use-update-user'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
-import { transformedUserProfileSchema, UserProfileFormInput, userProfileSchema } from '@/schemas/zod/user'
+import { transformedUserProfileSchema, UserProfileFormInput, userProfileSchema } from '@/features/users/schemas/user'
 import { Spinner } from '@/components/ui/spinner'
 
 /* ----------------------------- MAIN PAGE ----------------------------- */

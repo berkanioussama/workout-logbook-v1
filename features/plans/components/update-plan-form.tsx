@@ -6,12 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { PlanDaysFormInput, addPlanSchema } from "@/features/plans/schemas/plan";
+import { AddPlanFormInput, addPlanSchema, PlanDaysFormInput, PlanSchema, UpdatePlanFormInput, updatePlanSchema } from "@/features/plans/schemas/plan";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAddPlan } from "@/features/plans/hooks/use-add-plan";
-import { AddPlanFormInput } from "@/features/plans/schemas/plan";
-
+import { useUpdatePlan } from "@/features/plans/hooks/use-update-plan";
 
 
 // Then update your DAYS_OF_WEEK to use the correct type
@@ -30,36 +28,36 @@ const userWorkouts = [
     { id: '2', name: 'Leg Day' },
   ]
 
-const CreatePlanForm = () => {
+const UpdatePlanForm = ({plan}: {plan: PlanSchema}) => {
 
-    const { mutate, isPending } = useAddPlan()
+    const { mutate, isPending } = useUpdatePlan()
 
-    const form = useForm<AddPlanFormInput>({
-        resolver: zodResolver(addPlanSchema),
+    const form = useForm<UpdatePlanFormInput>({
+        resolver: zodResolver(updatePlanSchema),
         defaultValues: {
-            name: "",
-            isActive: false,
-            sundayWorkoutId: "rest-day",
-            mondayWorkoutId: "rest-day",
-            tuesdayWorkoutId: "rest-day",
-            wednesdayWorkoutId: "rest-day",
-            thursdayWorkoutId: "rest-day",
-            fridayWorkoutId: "rest-day",
-            saturdayWorkoutId: "rest-day",
+            name: plan.name,
+            isActive: plan.isActive,
+            sundayWorkoutId: plan.sundayWorkoutId || "rest-day",
+            mondayWorkoutId: plan.mondayWorkoutId || "rest-day",
+            tuesdayWorkoutId: plan.tuesdayWorkoutId || "rest-day",
+            wednesdayWorkoutId: plan.wednesdayWorkoutId || "rest-day",
+            thursdayWorkoutId: plan.thursdayWorkoutId || "rest-day",
+            fridayWorkoutId: plan.fridayWorkoutId || "rest-day",
+            saturdayWorkoutId: plan.saturdayWorkoutId || "rest-day",
         },
     })
 
-    function onSubmit(values: AddPlanFormInput) {
+    function onSubmit(values: UpdatePlanFormInput) {
         const cleanedValues = { ...values };
     
         const workoutDays = [
-        'sundayWorkoutId',
-        'mondayWorkoutId',
-        'tuesdayWorkoutId',
-        'wednesdayWorkoutId',
-        'thursdayWorkoutId',
-        'fridayWorkoutId',
-        'saturdayWorkoutId'
+            'sundayWorkoutId',
+            'mondayWorkoutId',
+            'tuesdayWorkoutId',
+            'wednesdayWorkoutId',
+            'thursdayWorkoutId',
+            'fridayWorkoutId',
+            'saturdayWorkoutId'
         ] as const;
 
         workoutDays.forEach(day => {
@@ -67,8 +65,13 @@ const CreatePlanForm = () => {
                 delete cleanedValues[day];
             }
         });
+        const data = {
+            ...cleanedValues,
+            id: plan.id,
+            isActive: cleanedValues.isActive ?? false
+        };
 
-        mutate(cleanedValues);
+        mutate(data);
     }
     
     return (
@@ -136,11 +139,11 @@ const CreatePlanForm = () => {
                     </div>
 
                     <Button type="submit" disabled={isPending}  className="w-full mt-3">
-                        {isPending ? <span className='flex items-center gap-2'><Spinner /> Saving...</span> : <span>Create Plan</span>}
+                        {isPending ? <span className='flex items-center gap-2'><Spinner /> Saving...</span> : <span>Update Plan</span>}
                     </Button>
                 </form>
             </Form>
         </div> 
     )
 }
-export default CreatePlanForm
+export default UpdatePlanForm
