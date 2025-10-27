@@ -5,8 +5,9 @@ import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { useDeletePlan } from "@/features/plans/hooks/use-delete-plan";
 import { Eye, Pencil, Trash } from "lucide-react";
-import UpdatePlanButton from "./update-plan-button";
 import { useSetActivePlan } from "../hooks/use-set-active-plan";
+import DrawerButton from "@/components/drawer-button";
+import UpdatePlanForm from "./update-plan-form";
 
 const PlansList = () => {
 
@@ -42,9 +43,12 @@ const PlansList = () => {
                                 onClick={() => handleSetAsActivePlan(plan.id)}
                             >{plan.isActive ? 'Active' : 'Set active'}</Button>
                             <Button size="sm"><Eye /></Button>
-                            <UpdatePlanButton plan={plan}>
+                            <DrawerButton
+                                title="Update Plan"
+                                formComponent={<UpdatePlanForm plan={plan} />}
+                            >
                                 <Button size="sm"><Pencil /></Button>
-                            </UpdatePlanButton>
+                            </DrawerButton>
                             
                             <Button size="sm" variant="destructive" disabled={isDeleting}
                                 onClick={() => handleDeletePlan(plan.id)} 

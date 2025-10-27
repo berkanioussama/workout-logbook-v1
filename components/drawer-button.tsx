@@ -5,26 +5,24 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { ReactNode } from "react";
 
 interface DrawerButtonProps {
-  children: ReactNode;
-  title: string;
-  formComponent: ReactNode;
-  triggerClassName?: string;
-  contentClassName?: string;
+    children: ReactNode;
+    title: string;
+    formComponent: ReactNode;
+    contentClassName?: string;
 }
 
 const DrawerButton = ({ 
   children, 
   title, 
-  formComponent, 
-  triggerClassName = "flex items-center justify-center gap-2 bg-neutral-800 px-2 py-2 rounded-md font-semibold cursor-pointer",
+  formComponent,
   contentClassName = "bg-neutral-900"
 }: DrawerButtonProps) => {
   return (
     <Drawer>
-      <DrawerTrigger className={triggerClassName}>
+      <DrawerTrigger>
         {children}
       </DrawerTrigger>
-      <DrawerContent className={`flex flex-col items-center ${contentClassName}`}>
+      <DrawerContent className={`flex flex-col items-center px-4 pb-4 ${contentClassName}`}>
         <ScrollArea className="h-[80vh] w-full">
           <DrawerTitle className="text-center text-white text-xl font-bold mt-2">
             {title}

@@ -1,4 +1,3 @@
-import CreateWorkoutButton from "@/features/workouts/components/create-workout-button";
 import WorkoutsList from "@/features/workouts/components/workouts-list";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
@@ -14,7 +13,7 @@ const Workout = () => {
                     title="Create New Workout"
                     formComponent={<CreateWorkoutForm />}
                 >
-                    <Button size="sm"><Plus /> Create New Workout</Button>
+                    <Button><Plus /> Create New Workout</Button>
                 </DrawerButton>
                 <WorkoutsList/>
             </div>

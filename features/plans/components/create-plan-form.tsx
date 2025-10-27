@@ -92,7 +92,7 @@ const CreatePlanForm = () => {
                         control={form.control}
                         name="isActive"
                         render={({ field }) => (
-                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 mt-4">
+                        <FormItem className="flex flex-row items-center justify-between rounded-lg border px-4 py-3 mt-4">
                             <FormLabel className="text-base">Set as Active Plan</FormLabel>
                             <FormControl>
                                 <Switch

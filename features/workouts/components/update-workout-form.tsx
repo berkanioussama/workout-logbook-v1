@@ -31,7 +31,7 @@ const UpdateWorkoutForm = ({workout}: {workout: WorkoutSchema}) => {
     }
     return (
         <Form {...form} >
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full mb-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
                 <FormField
                     control={form.control}
                     name="name"

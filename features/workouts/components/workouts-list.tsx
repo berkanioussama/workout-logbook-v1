@@ -3,9 +3,10 @@
 import { useGetUserWorkouts } from "@/features/workouts/hooks/use-get-user-workouts"
 import { Spinner } from "@/components/ui/spinner"
 import { useDeleteWorkout } from "@/features/workouts/hooks/use-delete-workout"
-import UpdateWorkoutButton from "./update-workout-button"
 import { Button } from "@/components/ui/button"
 import { Eye, Pencil, Trash } from "lucide-react"
+import DrawerButton from "@/components/drawer-button"
+import UpdateWorkoutForm from "./update-workout-form"
 
 const WorkoutsList = () => {
 
@@ -33,9 +34,12 @@ const WorkoutsList = () => {
                         <h3 className="font-semibold">{workout.name}</h3>
                         <div className="flex gap-2">
                             <Button size="sm"><Eye /></Button>
-                            <UpdateWorkoutButton workout={workout}>
+                            <DrawerButton
+                                title="Update Workout"
+                                formComponent={<UpdateWorkoutForm workout={workout} />}
+                            >
                                 <Button size="sm"><Pencil /></Button>
-                            </UpdateWorkoutButton>
+                            </DrawerButton>
                             
                             <Button size="sm" variant="destructive" disabled={isDeleting}
                                 onClick={() => handleDeleteWorkout(workout.id)} 
