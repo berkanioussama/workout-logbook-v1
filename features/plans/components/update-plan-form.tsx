@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { AddPlanFormInput, addPlanSchema, PlanDaysFormInput, PlanSchema, UpdatePlanFormInput, updatePlanSchema } from "@/features/plans/schemas/plan";
+import { AddPlanFormInput, PlanDaysFormInput, PlanSchema, UpdatePlanFormInput, updatePlanSchema } from "@/features/plans/schemas/plan";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUpdatePlan } from "@/features/plans/hooks/use-update-plan";

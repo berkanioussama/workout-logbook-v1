@@ -29,18 +29,18 @@ const PlansList = () => {
         
     return ( 
         <div className="container p-4 max-w-2xl flex flex-col gap-4 justify-center ">
-            <h2 className="text-2xl font-bold text-center">Plans List</h2>
+            <h2 className="text-xl font-bold text-center">My Plans</h2>
             <div className="flex flex-col gap-2">
                 {plans.length === 0 && (
                     <p className="text-center">No plans found</p>
                 )}
                 {plans.map((plan: any) => (
                     <div key={plan.id} className="flex items-center justify-between">
-                        <h3 className="text-lg font-semibold">{plan.name}</h3>
-                        <div className="flex gap-3">
+                        <h3 className="font-semibold">{plan.name}</h3>
+                        <div className="flex gap-2">
                             <Button size="sm" variant={plan.isActive ? 'secondary' : 'default'} disabled={plan.isActive || isSettingActive} 
                                 onClick={() => handleSetAsActivePlan(plan.id)}
-                            >{plan.isActive ? 'Active' : 'Set as active'}</Button>
+                            >{plan.isActive ? 'Active' : 'Set active'}</Button>
                             <Button size="sm"><Eye /></Button>
                             <UpdatePlanButton plan={plan}>
                                 <Button size="sm"><Pencil /></Button>
