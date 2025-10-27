@@ -6,14 +6,16 @@ import { Button } from "@/components/ui/button";
 import { useDeletePlan } from "@/features/plans/hooks/use-delete-plan";
 import { Eye, Pencil, Trash } from "lucide-react";
 import UpdatePlanButton from "./update-plan-button";
+import { useSetActivePlan } from "../hooks/use-set-active-plan";
 
 const PlansList = () => {
 
     const { data: plans, isLoading, error } = useGetUserPlans()
     const { mutate: deletePlan, isPending: isDeleting } = useDeletePlan()
+    const { mutate: setActivePlan, isPending: isSettingActive } = useSetActivePlan()
 
     const handleSetAsActivePlan = (planId: string) => {
-        
+        setActivePlan(planId)
     }
   
     const handleDeletePlan = (planId: string) => {
@@ -36,7 +38,9 @@ const PlansList = () => {
                     <div key={plan.id} className="flex items-center justify-between">
                         <h3 className="text-lg font-semibold">{plan.name}</h3>
                         <div className="flex gap-3">
-                            <Button size="sm" variant={plan.isActive ? 'secondary' : 'default'} disabled={plan.isActive} onClick={() => handleSetAsActivePlan(plan.id)}>{plan.isActive ? 'Active' : 'Set as active'}</Button>
+                            <Button size="sm" variant={plan.isActive ? 'secondary' : 'default'} disabled={plan.isActive || isSettingActive} 
+                                onClick={() => handleSetAsActivePlan(plan.id)}
+                            >{plan.isActive ? 'Active' : 'Set as active'}</Button>
                             <Button size="sm"><Eye /></Button>
                             <UpdatePlanButton plan={plan}>
                                 <Button size="sm"><Pencil /></Button>

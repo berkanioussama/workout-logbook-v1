@@ -1,0 +1,53 @@
+# === General Project Rules ===
+best_practices:
+  - Write clean, maintainable, and readable code.
+  - Follow best practices for performance, scalability, and security.
+  - Use clear, consistent naming and modular architecture.
+  - Keep code DRY (Don’t Repeat Yourself).
+  - Prioritize simplicity, clarity, and stability over complexity.
+  - Use environment variables or secure configuration files for sensitive data.
+  - Keep dependencies minimal, updated, and verified.
+  - Use modern syntax, language features, and safe design patterns.
+  - Validate inputs and handle errors gracefully in all contexts.
+  - Avoid hardcoding values, magic numbers, or unclear logic.
+  - Maintain a consistent project structure and organization.
+  - Write self-explanatory code that doesn’t rely on comments.
+  - Ensure code is portable and environment-agnostic (works across systems).
+
+documentation:
+  - Use clear and descriptive function, variable, and file names.
+  - Maintain a concise README with setup, usage, and contribution instructions.
+  - Document public interfaces, inputs, and outputs when necessary.
+  - Keep in-code documentation minimal — prefer self-explanatory code.
+  - Avoid inline or block comments unless absolutely necessary (e.g., TODOs or external requirements).
+
+assistant:
+  - When creating new files or modules, follow the existing project structure and naming conventions.
+  - Automatically fix and update imports or references when files are moved, renamed, or deleted.
+  - Remove unused imports, variables, functions, and files automatically.
+  - Always enforce consistent code style, formatting, and structure across the project.
+  - Do not generate unnecessary comments or explanations inside code.
+  - Suggest improvements only when they enhance security, readability, or efficiency.
+  - Avoid deprecated, unsafe, or inefficient syntax, libraries, or patterns.
+  - Optimize logic and structure wherever beneficial.
+  - Follow cleanup rules: auto-organize imports, delete dead code, and remove redundancy.
+  - Always produce production-ready, self-explanatory, and maintainable code.
+
+# === Code Maintenance & Cleanup Rules ===
+cleanup:
+    goals:
+        - Keep the project always clean, organized, and error-free.
+        - Automatically fix issues when files or code are moved, renamed, or deleted.
+        - Remove unused, unnecessary, or duplicated code.
+
+    rules:
+        - When files are renamed or moved, automatically update all import paths.
+        - When code is deleted or relocated, update or remove related imports.
+        - Delete unused imports, variables, functions, and constants.
+        - Delete empty or obsolete files (e.g., unused components or modules).
+        - Detect and remove dead or unreachable code.
+        - Never leave commented-out code blocks — delete them completely.
+        - Never use comments for explanation; code should be self-explanatory.
+        - Maintain consistent, minimal, and clean folder structure.
+        - Keep all files free of warnings and linter errors.
+        - Use auto-formatting after each edit to maintain consistent style.

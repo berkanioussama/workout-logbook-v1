@@ -26,3 +26,9 @@ export async function deletePlan(planId: string) {
   await client.delete(`plans/${planId}`)
   return { success: true }
 }
+
+export async function setActivePlan(planId: string) {
+  const client = await api()
+  const { data } = await client.put(`plans/set-active`, { id: planId })
+  return data
+}

@@ -1,0 +1,55 @@
+## tech stack
+Use this tech stack with latest versions:
+- typescript
+- nextjs
+- clerk
+- zod
+- shadcn
+- tanstack/react-query
+- axios
+- react-hook-form
+- clsx
+- sonner
+- lucide-react
+- tailwind
+- git
+
+## structure
+- app
+    - (auth)
+        - sign-in
+        - sign-up
+    - (pages)
+        - page name
+            - sub page name
+                - page.tsx
+            - page.tsx
+    - globals.css
+    - layout.tsx
+    - pages.tsx
+- components
+        - providers
+            - provider name.tsx
+        - ui
+            - component name.tsx
+        - component name.tsx
+- features
+    - feature name
+        - actions
+        - components
+        - hooks
+        - schemas
+- hooks
+    - use api query.ts
+    - use api mutation.ts
+    - use hook name.ts
+- lib
+    - api.ts
+    - utils.ts
+- pages
+- public
+
+    
+
+
+

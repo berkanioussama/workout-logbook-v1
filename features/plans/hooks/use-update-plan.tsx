@@ -6,6 +6,7 @@ import { useQueryClient } from '@tanstack/react-query'
 
 export function useUpdatePlan() {
   const queryClient = useQueryClient()
+  
   return useApiMutation(updatePlan, {
     successMessage: 'Plan updated successfully',
     errorMessage: 'Failed to update plan',
