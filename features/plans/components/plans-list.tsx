@@ -9,6 +9,7 @@ import { useSetActivePlan } from "../hooks/use-set-active-plan";
 import DrawerButton from "@/components/drawer-button";
 import UpdatePlanForm from "./update-plan-form";
 import { WorkoutSchema } from "@/features/workouts/schemas/workout";
+import LoadingPage from "@/components/loading-page";
 
 const PlansList = ({workouts}: {workouts: WorkoutSchema[]}) => {
 
@@ -26,7 +27,7 @@ const PlansList = ({workouts}: {workouts: WorkoutSchema[]}) => {
         }
     }
 
-    if (isLoading) return <div className="flex gap-2 items-center justify-center w-full h-svh"><Spinner /><p>Loading plans...</p></div>
+    if (isLoading) return <LoadingPage/>
     if (error) return <div className="flex items-center justify-center w-full h-svh"><p>Error loading plans</p></div>
         
     return ( 

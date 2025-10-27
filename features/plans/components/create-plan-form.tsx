@@ -12,16 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAddPlan } from "@/features/plans/hooks/use-add-plan";
 import { AddPlanFormInput } from "@/features/plans/schemas/plan";
 import { WorkoutSchema } from "@/features/workouts/schemas/workout";
-
-const DAYS_OF_WEEK: { name: keyof AddPlanFormInput; label: string }[] = [
-  { name: 'sundayWorkoutId', label: 'Sunday' },
-  { name: 'mondayWorkoutId', label: 'Monday' },
-  { name: 'tuesdayWorkoutId', label: 'Tuesday' },
-  { name: 'wednesdayWorkoutId', label: 'Wednesday' },
-  { name: 'thursdayWorkoutId', label: 'Thursday' },
-  { name: 'fridayWorkoutId', label: 'Friday' },
-  { name: 'saturdayWorkoutId', label: 'Saturday' },
-];
+import { DAYS_OF_WEEK } from "@/features/plans/schemas/types";
 
 const CreatePlanForm = ({workouts}: {workouts: WorkoutSchema[]}) => {
 
@@ -46,13 +37,13 @@ const CreatePlanForm = ({workouts}: {workouts: WorkoutSchema[]}) => {
         const cleanedValues = { ...values };
     
         const workoutDays = [
-        'sundayWorkoutId',
-        'mondayWorkoutId',
-        'tuesdayWorkoutId',
-        'wednesdayWorkoutId',
-        'thursdayWorkoutId',
-        'fridayWorkoutId',
-        'saturdayWorkoutId'
+            'sundayWorkoutId',
+            'mondayWorkoutId',
+            'tuesdayWorkoutId',
+            'wednesdayWorkoutId',
+            'thursdayWorkoutId',
+            'fridayWorkoutId',
+            'saturdayWorkoutId'
         ] as const;
 
         workoutDays.forEach(day => {

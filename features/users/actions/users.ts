@@ -10,9 +10,15 @@ interface UpdateUserBodyData {
   measurementsUnit?: string
 }
 
-export async function getUser() {
+export async function getProfile() {
     const instance = await api()
     const res = await instance.get('/users/profile')
+    return res.data.data // backend returns { data: user }
+}
+
+export async function getUser() {
+    const instance = await api()
+    const res = await instance.get('/users')
     return res.data.data // backend returns { data: user }
 }
 

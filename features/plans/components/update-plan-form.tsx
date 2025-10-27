@@ -6,23 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { AddPlanFormInput, PlanDaysFormInput, PlanSchema, UpdatePlanFormInput, updatePlanSchema } from "@/features/plans/schemas/plan";
+import { PlanDaysFormInput, PlanSchema, UpdatePlanFormInput, updatePlanSchema } from "@/features/plans/schemas/plan";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUpdatePlan } from "@/features/plans/hooks/use-update-plan";
 import { WorkoutSchema } from "@/features/workouts/schemas/workout";
-
-
-// Then update your DAYS_OF_WEEK to use the correct type
-const DAYS_OF_WEEK: { name: keyof AddPlanFormInput; label: string }[] = [
-  { name: 'sundayWorkoutId', label: 'Sunday' },
-  { name: 'mondayWorkoutId', label: 'Monday' },
-  { name: 'tuesdayWorkoutId', label: 'Tuesday' },
-  { name: 'wednesdayWorkoutId', label: 'Wednesday' },
-  { name: 'thursdayWorkoutId', label: 'Thursday' },
-  { name: 'fridayWorkoutId', label: 'Friday' },
-  { name: 'saturdayWorkoutId', label: 'Saturday' },
-];
+import { DAYS_OF_WEEK } from "@/features/plans/schemas/types";
 
 const UpdatePlanForm = ({plan, workouts}: {plan: PlanSchema, workouts: WorkoutSchema[]}) => {
 
