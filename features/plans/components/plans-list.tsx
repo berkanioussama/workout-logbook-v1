@@ -8,8 +8,9 @@ import { Eye, Pencil, Trash } from "lucide-react";
 import { useSetActivePlan } from "../hooks/use-set-active-plan";
 import DrawerButton from "@/components/drawer-button";
 import UpdatePlanForm from "./update-plan-form";
+import { WorkoutSchema } from "@/features/workouts/schemas/workout";
 
-const PlansList = () => {
+const PlansList = ({workouts}: {workouts: WorkoutSchema[]}) => {
 
     const { data: plans, isLoading, error } = useGetUserPlans()
     const { mutate: deletePlan, isPending: isDeleting } = useDeletePlan()
@@ -45,7 +46,7 @@ const PlansList = () => {
                             <Button size="sm"><Eye /></Button>
                             <DrawerButton
                                 title="Update Plan"
-                                formComponent={<UpdatePlanForm plan={plan} />}
+                                formComponent={<UpdatePlanForm plan={plan} workouts={workouts} />}
                             >
                                 <Button size="sm"><Pencil /></Button>
                             </DrawerButton>

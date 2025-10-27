@@ -11,10 +11,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAddPlan } from "@/features/plans/hooks/use-add-plan";
 import { AddPlanFormInput } from "@/features/plans/schemas/plan";
+import { WorkoutSchema } from "@/features/workouts/schemas/workout";
 
-
-
-// Then update your DAYS_OF_WEEK to use the correct type
 const DAYS_OF_WEEK: { name: keyof AddPlanFormInput; label: string }[] = [
   { name: 'sundayWorkoutId', label: 'Sunday' },
   { name: 'mondayWorkoutId', label: 'Monday' },
@@ -25,12 +23,7 @@ const DAYS_OF_WEEK: { name: keyof AddPlanFormInput; label: string }[] = [
   { name: 'saturdayWorkoutId', label: 'Saturday' },
 ];
 
-const userWorkouts = [
-    { id: '1', name: 'Chest Day' },
-    { id: '2', name: 'Leg Day' },
-  ]
-
-const CreatePlanForm = () => {
+const CreatePlanForm = ({workouts}: {workouts: WorkoutSchema[]}) => {
 
     const { mutate, isPending } = useAddPlan()
 
@@ -72,75 +65,73 @@ const CreatePlanForm = () => {
     }
     
     return (
-        <div className="container max-w-2xl mx-auto flex flex-col gap-2 items-center p-4">
-            <Form {...form} >
-                <form onSubmit={form.handleSubmit(onSubmit)} className="w-full mb-8">
-                    <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Name</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Add Plan Name" {...field}/>
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="isActive"
-                        render={({ field }) => (
-                        <FormItem className="flex flex-row items-center justify-between rounded-lg border px-4 py-3 mt-4">
-                            <FormLabel className="text-base">Set as Active Plan</FormLabel>
+        <Form {...form} >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Switch
-                                    checked={field.value}
-                                    onCheckedChange={field.onChange}
-                                />
+                                <Input placeholder="Add Plan Name" {...field}/>
                             </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="isActive"
+                    render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between rounded-lg border px-4 py-3 mt-4">
+                        <FormLabel className="text-base">Set as Active Plan</FormLabel>
+                        <FormControl>
+                            <Switch
+                                checked={field.value}
+                                onCheckedChange={field.onChange}
+                            />
+                        </FormControl>
+                    </FormItem>
+                    )}
+                />
+                
+                <div className="space-y-4 mt-4">
+                    {DAYS_OF_WEEK.map((day) => (
+                    <FormField
+                        key={day.name}
+                        control={form.control}
+                        name={day.name as keyof PlanDaysFormInput}
+                        render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>{day.label}</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value || "rest-day"}>
+                            <FormControl>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Select a workout"/>
+                                </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                                <SelectItem value="rest-day">Rest Day</SelectItem>
+                                {workouts.map((workout) => (
+                                <SelectItem key={workout.id} value={workout.id}>
+                                    {workout.name}
+                                </SelectItem>
+                                ))}
+                            </SelectContent>
+                            </Select>
+                            <FormMessage />
                         </FormItem>
                         )}
                     />
-                    
-                    <div className="space-y-4 mt-4">
-                        {DAYS_OF_WEEK.map((day) => (
-                        <FormField
-                            key={day.name}
-                            control={form.control}
-                            name={day.name as keyof PlanDaysFormInput}
-                            render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>{day.label}</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value || "rest-day"}>
-                                <FormControl>
-                                    <SelectTrigger className="w-full">
-                                        <SelectValue placeholder="Select a workout"/>
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="rest-day">Rest Day</SelectItem>
-                                    {userWorkouts.map((workout) => (
-                                    <SelectItem key={workout.id} value={workout.id}>
-                                        {workout.name}
-                                    </SelectItem>
-                                    ))}
-                                </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                            )}
-                        />
-                        ))}
-                    </div>
+                    ))}
+                </div>
 
-                    <Button type="submit" disabled={isPending}  className="w-full mt-3">
-                        {isPending ? <span className='flex items-center gap-2'><Spinner /> Saving...</span> : <span>Create Plan</span>}
-                    </Button>
-                </form>
-            </Form>
-        </div> 
+                <Button type="submit" disabled={isPending}  className="w-full mt-3">
+                    {isPending ? <span className='flex items-center gap-2'><Spinner /> Saving...</span> : <span>Create Plan</span>}
+                </Button>
+            </form>
+        </Form>
     )
 }
 export default CreatePlanForm

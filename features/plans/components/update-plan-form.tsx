@@ -10,6 +10,7 @@ import { AddPlanFormInput, PlanDaysFormInput, PlanSchema, UpdatePlanFormInput, u
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUpdatePlan } from "@/features/plans/hooks/use-update-plan";
+import { WorkoutSchema } from "@/features/workouts/schemas/workout";
 
 
 // Then update your DAYS_OF_WEEK to use the correct type
@@ -23,12 +24,7 @@ const DAYS_OF_WEEK: { name: keyof AddPlanFormInput; label: string }[] = [
   { name: 'saturdayWorkoutId', label: 'Saturday' },
 ];
 
-const userWorkouts = [
-    { id: '1', name: 'Chest Day' },
-    { id: '2', name: 'Leg Day' },
-  ]
-
-const UpdatePlanForm = ({plan}: {plan: PlanSchema}) => {
+const UpdatePlanForm = ({plan, workouts}: {plan: PlanSchema, workouts: WorkoutSchema[]}) => {
 
     const { mutate, isPending } = useUpdatePlan()
 
@@ -123,7 +119,7 @@ const UpdatePlanForm = ({plan}: {plan: PlanSchema}) => {
                             </FormControl>
                             <SelectContent>
                                 <SelectItem value="rest-day">Rest Day</SelectItem>
-                                {userWorkouts.map((workout) => (
+                                {workouts.map((workout) => (
                                 <SelectItem key={workout.id} value={workout.id}>
                                     {workout.name}
                                 </SelectItem>
