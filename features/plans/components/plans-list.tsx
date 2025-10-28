@@ -1,20 +1,25 @@
 'use client'
 
-import { useGetUserPlans } from "@/features/plans/hooks/use-get-user-plans";
-import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
-import { useDeletePlan } from "@/features/plans/hooks/use-delete-plan";
 import { Eye, Pencil, Trash } from "lucide-react";
 import { useSetActivePlan } from "../hooks/use-set-active-plan";
 import DrawerButton from "@/components/drawer-button";
 import UpdatePlanForm from "./update-plan-form";
 import { WorkoutSchema } from "@/features/workouts/schemas/workout";
 import LoadingPage from "@/components/loading-page";
+import { useGetModule } from "@/hooks/use-get-module";
+import { getPlans } from "../actions/plans";
+import { useDeleteModule } from "@/hooks/use-delete-module";
+import { deletePlan } from "../actions/plans";
 
 const PlansList = ({workouts}: {workouts: WorkoutSchema[]}) => {
 
-    const { data: plans, isLoading, error } = useGetUserPlans()
-    const { mutate: deletePlan, isPending: isDeleting } = useDeletePlan()
+    const { data: plans, isLoading, error } = useGetModule({ queryFn: getPlans, queryKey: ['get-user-plans'] })
+    const { mutate: deletePlanAction, isPending: isDeleting } = useDeleteModule({
+        name: "Plan",
+        deleteFn: deletePlan,
+        queryKey: ["get-user-plans"]
+    })
     const { mutate: setActivePlan, isPending: isSettingActive } = useSetActivePlan()
 
     const handleSetAsActivePlan = (planId: string) => {
@@ -23,7 +28,7 @@ const PlansList = ({workouts}: {workouts: WorkoutSchema[]}) => {
   
     const handleDeletePlan = (planId: string) => {
         if (confirm('Are you sure you want to delete this plan?')) {
-            deletePlan(planId)
+            deletePlanAction(planId)
         }
     }
 

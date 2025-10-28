@@ -1,21 +1,30 @@
 'use client'
 
-import { useGetUserWorkouts } from "@/features/workouts/hooks/use-get-user-workouts"
 import { Spinner } from "@/components/ui/spinner"
-import { useDeleteWorkout } from "@/features/workouts/hooks/use-delete-workout"
 import { Button } from "@/components/ui/button"
 import { Eye, Pencil, Trash } from "lucide-react"
 import DrawerButton from "@/components/drawer-button"
 import UpdateWorkoutForm from "./update-workout-form"
+import { getWorkouts } from "../actions/workouts"
+import { useGetModule } from "@/hooks/use-get-module"
+import { useDeleteModule } from "@/hooks/use-delete-module"
+import { deleteWorkout } from "../actions/workouts"
 
 const WorkoutsList = () => {
 
-    const { data: workouts, isLoading, error } = useGetUserWorkouts()
-    const { mutate: deleteWorkout, isPending: isDeleting } = useDeleteWorkout()
+    const { data: workouts, isLoading, error } = useGetModule({
+        queryFn: getWorkouts,
+        queryKey: ['get-user-workouts']
+    })
+    const { mutate: deleteWorkoutAction, isPending: isDeleting } = useDeleteModule({
+        name: "Workout",
+        deleteFn: deleteWorkout,
+        queryKey: ["get-user-workouts"]
+    })
 
     const handleDeleteWorkout = (workoutId: string) => {
         if (confirm('Are you sure you want to delete this workout?')) {
-            deleteWorkout(workoutId)
+            deleteWorkoutAction(workoutId)
         }
     }
 

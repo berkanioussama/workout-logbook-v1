@@ -4,16 +4,21 @@ import { Form, FormField, FormControl, FormItem, FormLabel, FormMessage } from "
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UpdateWorkoutFormInput, updateWorkoutSchema } from "@/features/workouts/schemas/workout";
-import { useUpdateWorkout } from "@/features/workouts/hooks/use-update-workout";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { Input } from "@/components/ui/input";
 import { WorkoutSchema } from "../schemas/workout";
+import { useUpdateModule } from "@/hooks/use-update-module";
+import { updateWorkout } from "../actions/workouts";
 
 
 const UpdateWorkoutForm = ({workout}: {workout: WorkoutSchema}) => {
 
-    const { mutate, isPending } = useUpdateWorkout()
+    const { mutate, isPending } = useUpdateModule({
+        name: "Workout",
+        updateFn: updateWorkout,
+        queryKey: ["get-user-workouts"]
+    })
     
     const form = useForm<UpdateWorkoutFormInput>({
         resolver: zodResolver(updateWorkoutSchema),

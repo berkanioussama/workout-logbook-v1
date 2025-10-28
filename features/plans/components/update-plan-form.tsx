@@ -9,13 +9,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { PlanDaysFormInput, PlanSchema, UpdatePlanFormInput, updatePlanSchema } from "@/features/plans/schemas/plan";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUpdatePlan } from "@/features/plans/hooks/use-update-plan";
 import { WorkoutSchema } from "@/features/workouts/schemas/workout";
 import { DAYS_OF_WEEK } from "@/features/plans/schemas/types";
+import { useUpdateModule } from "@/hooks/use-update-module";
+import { updatePlan } from "../actions/plans";
 
 const UpdatePlanForm = ({plan, workouts}: {plan: PlanSchema, workouts: WorkoutSchema[]}) => {
 
-    const { mutate, isPending } = useUpdatePlan()
+    const { mutate, isPending } = useUpdateModule({
+        name: "Plan",
+        updateFn: updatePlan,
+        queryKey: ["get-user-plans"]
+    })
 
     const form = useForm<UpdatePlanFormInput>({
         resolver: zodResolver(updatePlanSchema),

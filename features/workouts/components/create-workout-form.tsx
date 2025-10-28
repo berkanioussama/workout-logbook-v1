@@ -4,15 +4,20 @@ import { Form, FormField, FormControl, FormItem, FormLabel, FormMessage } from "
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateWorkoutFormInput, createWorkoutSchema } from "@/features/workouts/schemas/workout";
-import { useCreateWorkout } from "@/features/workouts/hooks/use-create-workout";
+import { createWorkout } from "@/features/workouts/actions/workouts";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { Input } from "@/components/ui/input";
+import { useCreateModule } from "@/hooks/use-create-module";
 
 
 const CreateWorkoutForm = () => {
 
-    const { mutate, isPending } = useCreateWorkout()
+    const { mutate, isPending } = useCreateModule({
+        name: "Workout",
+        createFn: createWorkout,
+        queryKey: ["get-user-workouts"]
+    })
     
     const form = useForm<CreateWorkoutFormInput>({
         resolver: zodResolver(createWorkoutSchema),

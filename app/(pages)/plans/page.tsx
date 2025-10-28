@@ -5,10 +5,11 @@ import { Plus } from "lucide-react";
 import DrawerButton from "@/components/drawer-button";
 import CreatePlanForm from "@/features/plans/components/create-plan-form";
 import { Button } from "@/components/ui/button";
-import { useGetUserWorkouts } from "@/features/workouts/hooks/use-get-user-workouts";
+import { useGetModule } from "@/hooks/use-get-module";
+import { getWorkouts } from "@/features/workouts/actions/workouts";
 
 const Plans = () => {
-    const { data: workouts } = useGetUserWorkouts()
+    const { data: workouts } = useGetModule({ queryFn: getWorkouts, queryKey: ['get-user-workouts'] })
     return (
         <div className="flex flex-col w-full min-h-svh">
             <h2 className="text-xl font-bold text-center">Plans</h2>
