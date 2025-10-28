@@ -3,16 +3,14 @@
 import { useMutation, UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
-/**
- * A reusable mutation hook for POST/PUT/DELETE requests.
- * Automatically handles success/error toasts.
- */
+interface ApiMutationOptions<TData, TVariables> extends UseMutationOptions<TData, Error, TVariables> {
+  successMessage?: string
+  errorMessage?: string
+}
+
 export function useApiMutation<TData, TVariables = void>(
   fn: (variables: TVariables) => Promise<TData>,
-  options?: UseMutationOptions<TData, Error, TVariables> & {
-    successMessage?: string
-    errorMessage?: string
-  }
+  options?: ApiMutationOptions<TData, TVariables>
 ): UseMutationResult<TData, Error, TVariables> {
   return useMutation({
     mutationFn: fn,
