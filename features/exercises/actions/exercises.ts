@@ -11,14 +11,14 @@ export async function getExercises() {
 
 export async function createExercise(data: CreateExerciseFormInput) {
   const client = await api()
-  const { data: plan } = await client.post('exercises', data)
-  return plan.data
+  const { data: exercise } = await client.post('exercises', data)
+  return exercise.data
 }
 
 export async function updateExercise(data: ExerciseSchema) {
   const client = await api()
-  const { data: plan } = await client.put(`exercises`, data)
-  return plan.data
+  const { data: exercise } = await client.put(`exercises`, data)
+  return exercise.data
 }
 
 export async function deleteExercise(exerciseId: string) {

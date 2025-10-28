@@ -25,6 +25,7 @@ const Profile = () => {
                 <Stats 
                     plans={profile.plans} 
                     workouts={profile.workouts}
+                    exercises={profile.exercises}
                 />
             </div>
         </div> 

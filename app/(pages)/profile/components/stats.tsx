@@ -1,9 +1,10 @@
 interface StatsProps {
     plans: any, 
     workouts: any,
+    exercises: any,
 }
 
-const Stats = ({plans, workouts}: StatsProps) => {
+const Stats = ({plans, workouts, exercises}: StatsProps) => {
     
     return ( 
         <div className='flex gap-2 items-center justify-between w-full'>
@@ -17,7 +18,7 @@ const Stats = ({plans, workouts}: StatsProps) => {
             </div>
             <div className='flex flex-col items-center justify-center'>
                 <h3 className='text-sm font-bold'>Exercises</h3>
-                <span className='text-xl'>not yet</span>
+                <span className='text-xl'>{exercises.length}</span>
             </div>
         </div>
      );

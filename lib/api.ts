@@ -18,7 +18,7 @@ export async function api() {
             let message = 'Server Error'
             if (error.response?.data) {
                 if (typeof error.response.data === 'string') {
-                    if (error.response.data.includes('Cannot GET')) {
+                    if (error.response.data.includes('Cannot ')) {
                         message = 'Invalid endpoint — check your API route.'
                     } else {
                         message = error.response.data.slice(0, 100)
