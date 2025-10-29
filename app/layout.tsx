@@ -57,8 +57,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-neutral-950 text-white`}
       >
         <ReactQueryProvider>
-          {children}
-          <Footer />
+            {children}
           <Toaster />
         </ReactQueryProvider>
       </body>

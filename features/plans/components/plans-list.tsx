@@ -1,20 +1,46 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { Eye, Pencil, Trash } from "lucide-react";
+import { Pencil, Trash } from "lucide-react";
 import { useSetActivePlan } from "../hooks/use-set-active-plan";
 import DrawerButton from "@/components/drawer-button";
 import UpdatePlanForm from "./update-plan-form";
 import { WorkoutSchema } from "@/features/workouts/schemas/workout";
 import LoadingPage from "@/components/loading-page";
-import { useGetModule } from "@/hooks/use-get-module";
-import { getPlans } from "../actions/plans";
 import { useDeleteModule } from "@/hooks/use-delete-module";
 import { deletePlan } from "../actions/plans";
+import { PlanSchema } from "../schemas/plan";
 
-const PlansList = ({workouts}: {workouts: WorkoutSchema[]}) => {
+interface PlansListProps {
+    workouts: WorkoutSchema[]
+    plans: PlanSchema[]
+    isLoadingPlans: boolean
+    errorPlans: Error | null
+}
 
-    const { data: plans, isLoading, error } = useGetModule({ queryFn: getPlans, queryKey: ['get-user-plans'] })
+const PlansList = ({workouts, plans, isLoadingPlans, errorPlans}: PlansListProps) => {
+
+    if (isLoadingPlans) return <LoadingPage/>
+    if (errorPlans) return <div className="flex items-center justify-center w-full h-svh"><p>Error loading plans</p></div>
+        
+    return ( 
+        <div className="flex flex-col gap-4 justify-center ">
+            <div className="flex flex-col gap-2">
+                {plans.length === 0 && (
+                    <p className="text-center">No plans found</p>
+                )}
+                {plans.map((plan: PlanSchema) => (
+                    <Plan plan={plan} workouts={workouts}
+                    />
+                ))}
+            </div>
+        </div>
+     );
+}
+ 
+export default PlansList;
+
+export const Plan = ({plan, workouts}: {plan: PlanSchema, workouts: WorkoutSchema[]}) => {
     const { mutate: deletePlanAction, isPending: isDeleting } = useDeleteModule({
         name: "Plan",
         deleteFn: deletePlan,
@@ -31,41 +57,41 @@ const PlansList = ({workouts}: {workouts: WorkoutSchema[]}) => {
             deletePlanAction(planId)
         }
     }
+    const countWorkoutDays = (plan: PlanSchema) => {
+        const days = [
+            plan.sundayWorkoutId,
+            plan.mondayWorkoutId,
+            plan.tuesdayWorkoutId,
+            plan.wednesdayWorkoutId,
+            plan.thursdayWorkoutId,
+            plan.fridayWorkoutId,
+            plan.saturdayWorkoutId
+        ];
+        return days.filter(day => day).length;
+    };
+    const workoutDays = plan ? countWorkoutDays(plan) : 0;
 
-    if (isLoading) return <LoadingPage/>
-    if (error) return <div className="flex items-center justify-center w-full h-svh"><p>Error loading plans</p></div>
-        
-    return ( 
-        <div className="container p-4 max-w-2xl flex flex-col gap-4 justify-center ">
-            <h2 className="text-xl font-bold text-center">My Plans</h2>
-            <div className="flex flex-col gap-2">
-                {plans.length === 0 && (
-                    <p className="text-center">No plans found</p>
-                )}
-                {plans.map((plan: any) => (
-                    <div key={plan.id} className="flex items-center justify-between">
-                        <h3 className="font-semibold">{plan.name}</h3>
-                        <div className="flex gap-2">
-                            <Button size="sm" variant={plan.isActive ? 'secondary' : 'default'} disabled={plan.isActive || isSettingActive} 
-                                onClick={() => handleSetAsActivePlan(plan.id)}
-                            >{plan.isActive ? 'Active' : 'Set active'}</Button>
-                            <Button size="sm"><Eye /></Button>
-                            <DrawerButton
-                                title="Update Plan"
-                                formComponent={<UpdatePlanForm plan={plan} workouts={workouts} />}
-                            >
-                                <Button size="sm"><Pencil /></Button>
-                            </DrawerButton>
-                            
-                            <Button size="sm" variant="destructive" disabled={isDeleting}
-                                onClick={() => handleDeletePlan(plan.id)} 
-                            ><Trash /></Button>
-                        </div>
-                    </div>
-                ))}
+    return (
+        <div key={plan.id} className="flex items-center justify-between bg-[#20321B] p-4 rounded-lg">
+            <div className="flex flex-col">
+                <h3 className="font-semibold mb-0.5">{plan.name}</h3>
+                <p className="text-xs text-neutral-300">{workoutDays} workout {workoutDays === 1 ? 'day' : 'days'} per week</p>
+            </div>
+            <div className="flex gap-2">
+                <Button  size="sm" variant={plan.isActive ? 'secondary' : 'default'} disabled={plan.isActive || isSettingActive} 
+                    onClick={() => handleSetAsActivePlan(plan.id)}
+                >{plan.isActive ? 'Active' : 'Activate'}</Button>
+                <DrawerButton
+                    title="Update Plan"
+                    formComponent={<UpdatePlanForm plan={plan} workouts={workouts} />}
+                >
+                    <Button size="sm" variant='secondary'><Pencil /></Button>
+                </DrawerButton>
+                
+                <Button size="sm" variant="destructive" disabled={isDeleting}
+                    onClick={() => handleDeletePlan(plan.id)} 
+                ><Trash /></Button>
             </div>
         </div>
-     );
+    )
 }
- 
-export default PlansList;

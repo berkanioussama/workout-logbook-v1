@@ -51,8 +51,8 @@ const UpdateWorkoutForm = ({workout}: {workout: WorkoutSchema}) => {
                     )}
                 />
 
-                <Button type="submit" disabled={isPending}  className="w-full mt-3">
-                    {isPending ? <span className='flex items-center gap-2'><Spinner /> Updating...</span> : <span>Update Workout</span>}
+                <Button type="submit" disabled={isPending}  className="w-full mt-4">
+                    {isPending ? <span className='flex items-center gap-2 font-semibold'><Spinner /> Updating...</span> : <span className="font-semibold">Update Workout</span>}
                 </Button>
             </form>
         </Form>

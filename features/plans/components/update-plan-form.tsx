@@ -127,8 +127,8 @@ const UpdatePlanForm = ({plan, workouts}: {plan: PlanSchema, workouts: WorkoutSc
                     ))}
                 </div>
 
-                <Button type="submit" disabled={isPending}  className="w-full mt-3">
-                    {isPending ? <span className='flex items-center gap-2'><Spinner /> Saving...</span> : <span>Update Plan</span>}
+                <Button type="submit" disabled={isPending}  className="w-full mt-4">
+                    {isPending ? <span className='flex items-center gap-2 font-semibold'><Spinner /> Saving...</span> : <span className="font-semibold">Update Plan</span>}
                 </Button>
             </form>
         </Form>

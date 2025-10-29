@@ -69,7 +69,7 @@ const CreatePlanForm = ({workouts}: {workouts: WorkoutSchema[]}) => {
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Name</FormLabel>
-                            <FormControl>
+                            <FormControl className="bg-white/5 border-white/15 h-10">
                                 <Input placeholder="Add Plan Name" {...field}/>
                             </FormControl>
                             <FormMessage />
@@ -123,8 +123,8 @@ const CreatePlanForm = ({workouts}: {workouts: WorkoutSchema[]}) => {
                     ))}
                 </div>
 
-                <Button type="submit" disabled={isPending}  className="w-full mt-3">
-                    {isPending ? <span className='flex items-center gap-2'><Spinner /> Saving...</span> : <span>Create Plan</span>}
+                <Button type="submit" disabled={isPending}  className="w-full mt-4">
+                    {isPending ? <span className='flex items-center gap-2 font-semibold'><Spinner /> Saving...</span> : <span className="font-semibold">Create Plan</span>}
                 </Button>
             </form>
         </Form>
