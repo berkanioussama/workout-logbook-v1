@@ -10,7 +10,7 @@ import { PlanDaysFormInput, addPlanSchema } from "@/features/plans/schemas/plan"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddPlanFormInput } from "@/features/plans/schemas/plan";
-import { WorkoutSchema } from "@/features/workouts/schemas/workout";
+import { WorkoutSchema } from "@/features/workouts/schemas/zod";
 import { DAYS_OF_WEEK } from "@/features/plans/schemas/types";
 import { useCreateModule } from "@/hooks/use-create-module";
 import { addPlan } from "../actions/plans";

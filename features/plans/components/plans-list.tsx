@@ -5,7 +5,7 @@ import { Pencil, Trash } from "lucide-react";
 import { useSetActivePlan } from "../hooks/use-set-active-plan";
 import DrawerButton from "@/components/drawer-button";
 import UpdatePlanForm from "./update-plan-form";
-import { WorkoutSchema } from "@/features/workouts/schemas/workout";
+import { WorkoutSchema } from "@/features/workouts/schemas/zod";
 import LoadingPage from "@/components/loading-page";
 import { useDeleteModule } from "@/hooks/use-delete-module";
 import { deletePlan } from "../actions/plans";

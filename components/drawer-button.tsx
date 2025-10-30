@@ -15,7 +15,7 @@ const DrawerButton = ({
   children, 
   title, 
   formComponent,
-  contentClassName = "bg-neutral-900"
+  contentClassName = "bg-main-darker"
 }: DrawerButtonProps) => {
   return (
     <Drawer>

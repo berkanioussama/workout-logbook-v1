@@ -18,7 +18,7 @@ const Profile = () => {
     </Alert>
   
     return ( 
-        <div className="flex flex-col items-center w-full min-h-svh ">
+        <div className="flex flex-col items-center w-full min-h-svh">
             <TopBar />
             <div className="container p-4">
                 <UpdateUserForm user={profile.user}/>

@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { PlanDaysFormInput, PlanSchema, UpdatePlanFormInput, updatePlanSchema } from "@/features/plans/schemas/plan";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { WorkoutSchema } from "@/features/workouts/schemas/workout";
+import { WorkoutSchema } from "@/features/workouts/schemas/zod";
 import { DAYS_OF_WEEK } from "@/features/plans/schemas/types";
 import { useUpdateModule } from "@/hooks/use-update-module";
 import { updatePlan } from "../actions/plans";

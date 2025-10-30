@@ -10,7 +10,7 @@ import { useGetModule } from "@/hooks/use-get-module";
 import { getWorkouts } from "@/features/workouts/actions/workouts";
 import { getPlans } from "@/features/plans/actions/plans";
 import { PlanSchema } from "@/features/plans/schemas/plan";
-import { WorkoutSchema } from "@/features/workouts/schemas/workout";
+import { WorkoutSchema } from "@/features/workouts/schemas/zod";
 import UpdatePlanForm from "@/features/plans/components/update-plan-form";
 
 interface PlansProps {
@@ -27,7 +27,7 @@ const Plans = () => {
     const activePlan = plans?.find((plan: PlanSchema) => plan.isActive)
 
     return (
-        <div className="flex flex-col w-full min-h-svh bg-[#152011]">
+        <div className="flex flex-col w-full min-h-svh">
 
             <ActivePlan plan={activePlan} workouts={workouts}/>
             <AllPlans plans={plans} isLoadingPlans={isLoadingPlans} errorPlans={errorPlans} workouts={workouts}/>
