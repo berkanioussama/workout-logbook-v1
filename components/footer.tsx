@@ -7,8 +7,8 @@ import { usePathname } from "next/navigation";
 const Footer = () => {
 
     return (
-        <footer className="bg-main-darker text-white absolute bottom-0 w-full flex items-center justify-center pt-3 border-t border-white/10">
-            <div className="container grid grid-cols-5">
+        <footer className="bg-main-darker text-white absolute bottom-0 w-full flex items-center justify-center pt-3 pb-2 border-t border-white/10">
+            <div className="container max-w-xl mx-auto px-4 grid grid-cols-5">
                 <Tab icon={<House size={20} />} href="/pages/logs" name="Home" />
                 <Tab icon={<Dumbbell size={20} />} href="/pages/exercises" name="Exercises" />
                 <Tab icon={<Calendar1 size={20} />} href="/pages/workouts" name="Workouts" />

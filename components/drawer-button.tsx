@@ -27,7 +27,7 @@ const DrawerButton = ({
           <DrawerTitle className="text-center text-white text-xl font-bold mt-2">
             {title}
           </DrawerTitle>
-          <div className="container max-w-2xl mx-auto flex flex-col gap-2 items-center p-4 pb-10">
+          <div className="container max-w-xl mx-auto flex flex-col gap-2 items-center p-4 pb-10">
             {formComponent}
           </div>
         </ScrollArea>

@@ -56,7 +56,7 @@ export const ActivePlan = ({plan, workouts}: {plan: PlanSchema | undefined, work
     };
     const workoutDays = plan ? countWorkoutDays(plan) : 0;
     return (
-        <div className="container p-4 flex gap-2 flex-col">
+        <div className="container max-w-xl mx-auto p-4 flex gap-2 flex-col">
             <h2 className="text-lg font-bold">Active Plan</h2>
             <div className="p-4 bg-[#20321B] rounded-lg">
                 {plan && (
@@ -85,7 +85,7 @@ export const ActivePlan = ({plan, workouts}: {plan: PlanSchema | undefined, work
 
 export const AllPlans = ({plans, isLoadingPlans, errorPlans, workouts}: PlansProps) => {
     return (
-        <div className="container p-4 flex gap-2 flex-col">
+        <div className="container max-w-xl mx-auto p-4 flex gap-2 flex-col">
             <h2 className="text-lg font-bold">All Plans</h2>
             <PlansList plans={plans} isLoadingPlans={isLoadingPlans} errorPlans={errorPlans} workouts={workouts}/>
         </div>  

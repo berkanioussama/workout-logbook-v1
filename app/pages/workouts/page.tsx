@@ -13,8 +13,8 @@ const Workout = () => {
     })
 
     return ( 
-        <div className=" w-full min-h-svh">
-            <div className="container p-4 max-w-2xl flex flex-col gap-4 items-center justify-center">
+        <div className="w-full min-h-svh">
+            <div className="container p-4 max-w-xl mx-auto flex flex-col gap-4 items-center justify-center">
                 <FloatDrawerButton
                     title="Create New Workout"
                     formComponent={<CreateWorkoutForm exercises={exercises} />}
