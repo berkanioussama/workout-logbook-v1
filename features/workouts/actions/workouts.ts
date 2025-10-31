@@ -1,11 +1,17 @@
 'use server'
 
 import { api } from '@/lib/api'
-import { CreateWorkoutFormInput, UpdateWorkoutFormInput } from '../schemas/workout'
+import { CreateWorkoutFormInput, UpdateWorkoutFormInput } from '../schemas/zod'
 
 export async function getWorkouts() {
   const client = await api()
   const { data } = await client.get('workouts/user')
+  return data.data
+}
+
+export async function getWorkoutExercises(workoutId: string) {
+  const client = await api()
+  const { data } = await client.get(`workouts/exercises/${workoutId}`)
   return data.data
 }
 

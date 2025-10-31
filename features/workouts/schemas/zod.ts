@@ -7,12 +7,12 @@ export const workoutSchema = z.object({
 
 export const createWorkoutSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters long"),
-    exercisesIds: z.array(z.string()).min(1, "At least one exercise is required")
+    exercisesIds: z.array(z.uuid()).min(1, "At least one exercise is required"),
 });
 
 export const updateWorkoutSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters long"),
-    exercisesIds: z.array(z.string()).min(1, "At least one exercise is required"),
+    exercisesIds: z.array(z.uuid()).min(1, "At least one exercise is required"),
 });
 
 export type WorkoutSchema = z.infer<typeof workoutSchema>
@@ -25,7 +25,6 @@ export const workoutExerciseSchema = z.object({
     workoutId: z.string(),
     exerciseId: z.string(),
 })
-
 
 export const createWorkoutExerciseSchema = z.object({
     workoutId: z.string(),

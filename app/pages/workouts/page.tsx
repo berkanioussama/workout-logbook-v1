@@ -1,6 +1,6 @@
 'use client'
 import WorkoutsList from "@/features/workouts/components/workouts-list";
-import CreateWorkoutForm from "@/features/workouts/components/create-workout-form-v2";
+import CreateWorkoutForm from "@/features/workouts/components/create-workout-form";
 import FloatDrawerButton from "@/components/float-drawer-button";
 import { useGetModule } from "@/hooks/use-get-module";
 import { getExercises } from "@/features/exercises/actions/exercises";
