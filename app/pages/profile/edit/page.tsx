@@ -25,9 +25,9 @@ export default function Edit() {
 
 /* ----------------------------- TOP BAR ----------------------------- */
 const TopBar = () => (
-  <div className="flex items-center justify-center w-full bg-neutral-800 py-4">
-    <div className="container px-4 flex items-center justify-between">
-      <Link href="/profile" className="cursor-pointer text-white">
+  <div className="w-full bg-main-darker border-b border-white/10 py-4">
+    <div className="container max-w-xl mx-auto px-4 flex items-center justify-between">
+      <Link href="/profile" className="cursor-pointer text-white ">
         <ArrowLeft />
       </Link>
     </div>
@@ -79,7 +79,7 @@ function ProfileForm() {
     ]
 
     return (
-        <div className="container max-w-2xl px-4 flex flex-col items-center">
+        <div className="container max-w-xl mx-auto px-4 flex flex-col items-center">
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='w-full'>
             <div className='flex flex-col items-center w-full gap-4'>
@@ -92,7 +92,7 @@ function ProfileForm() {
                     <FormItem className='w-full'>
                         <FormLabel className='font-semibold'>{fieldInfo.label}</FormLabel>
                         <FormControl>
-                            <Input type={fieldInfo.type} {...field} className='bg-neutral-800 border-neutral-600'/>
+                            <Input type={fieldInfo.type} {...field} className='bg-main-dark border-neutral-600'/>
                         </FormControl>
                         <FormMessage />
                     </FormItem>
@@ -115,7 +115,7 @@ function ProfileForm() {
                                 onValueChange={field.onChange}
                                 value={field.value}
                             >
-                                <SelectTrigger className="bg-neutral-800 border-neutral-600 w-full cursor-pointer">
+                                <SelectTrigger className="bg-main-dark border-neutral-600 w-full cursor-pointer">
                                     <SelectValue placeholder={`Select ${fieldInfo.label}`} />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -136,7 +136,7 @@ function ProfileForm() {
                 />
                 ))}
 
-                <Button type="submit" disabled={isPending} className="w-full mt-3">
+                <Button type="submit" size="fit" disabled={isPending} className="mt-3">
                     {isPending ? <span className='flex items-center gap-2'><Spinner /> Saving...</span> : <span>Save Changes</span>}
                 </Button>
             </div>
