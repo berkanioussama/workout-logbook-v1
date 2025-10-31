@@ -28,8 +28,11 @@ export async function deleteWorkout(workoutId: string) {
   return data.data
 }
 
-export async function updateWorkout(data: UpdateWorkoutFormInput) {
+interface UpdateWorkoutProps extends UpdateWorkoutFormInput {
+    id: string;
+}
+export async function updateWorkout(data: UpdateWorkoutProps) {
   const client = await api()
-  const { data: workout } = await client.put(`workouts`, data)
+  const { data: workout } = await client.put(`workouts/${data.id}`, data)
   return workout.data
 }

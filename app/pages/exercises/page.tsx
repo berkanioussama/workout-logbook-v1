@@ -5,8 +5,7 @@ import FloatDrawerButton from "@/components/float-drawer-button";
 const Exercises = () => {
     return ( 
         <div className="w-full min-h-svh">
-            <div className="container px-4 max-w-2xl flex flex-col items-center justify-center ">
-                <TopBar />
+            <div className="container p-4 max-w-2xl flex flex-col items-center justify-center ">
                 <FloatDrawerButton
                     title="Create New Exercise"
                     formComponent={<CreateExerciseForm/>}
